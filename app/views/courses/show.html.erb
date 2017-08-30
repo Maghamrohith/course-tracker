@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+<h3> Students Enrolled : </h3>
+<ol>
+   <% @course.students.each do |student| %>
+      <li><%= link_to student.name,student_path(student) %></li>
+      <% end %>
+      </ol> 
+      <h2>Ratings: </h2>
+      <%= form_for @rating do |f| %>
+      <label>Add Rating: </label><br/>
+      <%= f.collection_radio_buttons :rating, [[1, '1'] ,[2, '2'],[3, '3'],[4, '4'],[5, '5']], :first, :last %>
+
+
+      <%= f.hidden_field :courses_id, value: @course.id %>
+      <%= f.submit %>
+      <% end %>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
